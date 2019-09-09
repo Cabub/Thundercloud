@@ -1,0 +1,34 @@
+<html>
+<head>
+  <script src='/static/lib/jquery/jquery-3.4.1.min.js'></script>
+  <script src='/static/js/utils.js'></script>
+  <script type="text/javascript">
+    var root_dir = '{{ root.id }}';
+  </script>
+  <script src='/static/files/js/index.js'></script>
+</head>
+<body>
+  <div>
+    <div>
+      <h3><span id="pwd">/</span></h3>
+      <span style="display:inline; float:right;">
+        <form id="add-file-form" action="/files/api/v1/file" method="post" enctype="multipart/form-data">
+          <input type="hidden" id="add-file-parent" name="parent" value="{{ root.id }}">
+          <input type="text" id="add-file-name" name="name" placeholder="New File">
+          <input type="file" id="add-file-file" name="file">
+          <button id="add-file-button" type="submit">Add File</button>
+        </form>
+        <form id="add-folder-form" action="/files/api/v1/folder" method="post">
+          <input type="hidden" id="add-folder-parent" name="parent" value="{{ root.id }}">
+          <input type="text" id="add-folder-name" name="name" placeholder="New Folder">
+          <button id="add-folder-button" type="submit">Add Folder</button>
+        </form>
+      </span>
+    </div>
+  </div>
+  <div>
+    <ul id="directory_listing">
+    </ul>
+  </div>
+</body>
+</html>
