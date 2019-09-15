@@ -1,8 +1,8 @@
+from uuid import uuid4
 from django.db import models
 from django.db.models import Value
 from django.conf import settings
 from django.utils import timezone
-from uuid import uuid4
 
 
 def user_directory_path(instance, filename):
@@ -126,3 +126,4 @@ class UserPassphraseKey(models.Model):
     )
     salt = models.BinaryField(max_length=16, null=False, blank=False)
     cipher_key = models.BinaryField(max_length=256, null=False, blank=False)
+

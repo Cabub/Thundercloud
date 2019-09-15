@@ -2,24 +2,26 @@ import base64
 import os
 import io
 import math
-from cryptography.fernet import Fernet, MultiFernet
+from cryptography.fernet import Fernet
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from django.conf import settings
 from Crypto.Cipher import AES
-from Crypto.Util.Padding import pad, unpad
 from Crypto.Random import get_random_bytes
 
 
 def generate_random_key():
     return get_random_bytes(16)
 
+
 def generate_random_fernet_key():
     return Fernet.generate_key()
 
+
 def generate_salt():
     return os.urandom(16)
+
 
 def derive_passphrase_key(passphrase, salt):
     kdf = PBKDF2HMAC(
@@ -32,13 +34,16 @@ def derive_passphrase_key(passphrase, salt):
     key = base64.urlsafe_b64encode(kdf.derive(passphrase))
     return key
 
+
 def encrypt_key(encryption_key, key_to_encrypt):
     context = Fernet(encryption_key)
     return context.encrypt(key_to_encrypt)
 
+
 def decrypt_key(encryption_key, cipher_key):
     context = Fernet(encryption_key)
     return context.decrypt(cipher_key)
+
 
 def generate_backup_passphrase():
     """ Picks random words from a wordlist to generate a backup passphrase
@@ -174,3 +179,4 @@ class EncryptingStreamWriter(io.BufferedWriter):
 
     def write(self, b):
         return super().write(self._encrypter.encrypt(b))
+

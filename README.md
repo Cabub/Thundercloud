@@ -7,30 +7,21 @@
 - REST API
 - Collect/Store/Transfer as little data as possible
 
-### Initial encryption method: GNUPG
-
-#### Pros
-
-- Well known methodology
-- Audited
-- FOSS
-- Sharing is possible via multiple recipients
-
-#### Cons
-
-- Server side will have access to password and secret key (This means if something gets memory-level access to the box, it could potentially decrypt user's files)
- - Mitigations:
-   - Client-side encryption
-     - openpgpjs [not great user experience with files]
-     - client-side application/browser plugin [larger attack surface, bad trust model]
-   - Lock down server
-     - This will work for most hosters' threat model, but is not a viable option against determined actors or persistent threats
-
-
 ## Future Goals
 
 - Client-side file encryption
 - As close to zero knowledge as possible
  - Use hashes instead of usernames
  - No emails
- - Encrypt everything so that only the user can retrieve it
+
+ ## Encryption Model
+
+When a user is created, we (will) create a backup key and a passphrase key
+that will encrypt their (secret) session key.
+
+backup keys and passphrase keys are derived using the passphrases provided,
+then we use those to decrypt the session key.
+
+Files are encrypted individually, using a randomly generated key
+
+This key is encrypted using a session key and saved alongside the file

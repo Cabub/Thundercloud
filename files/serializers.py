@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import File, Folder
-from system.models import User
 
 
 class FileSerializer(serializers.ModelSerializer):
@@ -14,8 +13,11 @@ class FileSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         validated_data['owner'] = self.context['request'].user
-        validated_data['initialization_vector'] = self.context['request'].FILES['file'].initialization_vector
-        validated_data['cipher_key'] = self.context['request'].FILES['file'].cipher_key
+        validated_data['initialization_vector'] = \
+            self.context['request'].FILES['file'].initialization_vector
+        validated_data['cipher_key'] = \
+            self.context['request'].FILES['file'].cipher_key
+
         return super().create(validated_data)
 
     class Meta:
@@ -37,17 +39,18 @@ class FolderSerializer(serializers.ModelSerializer):
 
 
 class DirectoryChildSerializer(serializers.Serializer):
-        name = serializers.CharField()
-        id = serializers.CharField()
-        type = serializers.CharField()
-        created = serializers.DateTimeField(
-            format='%Y-%m-%d %H:%M:%S', read_only=True
-        )
-        modified = serializers.DateTimeField(
-            format='%Y-%m-%d %H:%M:%S', read_only=True
-        )
-        class Meta:
-            fields = '__all__'
+    name = serializers.CharField()
+    id = serializers.CharField()
+    type = serializers.CharField()
+    created = serializers.DateTimeField(
+        format='%Y-%m-%d %H:%M:%S', read_only=True
+    )
+    modified = serializers.DateTimeField(
+        format='%Y-%m-%d %H:%M:%S', read_only=True
+    )
+
+    class Meta:
+        fields = '__all__'
 
 
 class DirectorySerializer(serializers.Serializer):
