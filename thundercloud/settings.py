@@ -151,3 +151,7 @@ ENCRYPTION_BACKUP_KEY = {
     'backup_token_count': 20,
     'backup_word_list_count': 28091
 }
+
+
+# Authentication configuration
+LOGIN_REDIRECT_URL = '/files/'

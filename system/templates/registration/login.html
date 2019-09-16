@@ -7,11 +7,16 @@
   </div>
   <div>
     <span style="display:inline; float:middle;">
-      <form id="login-form" action="/system/login" method="post">
+      <form id="login-form" action="/system/login/" method="post">
+        {% csrf_token %}
         <input type="text" id="username" name="username" placeholder="Username">
         <input type="password" id="password" name="password" placeholder="Password">
         <button id="submit_btn" type="submit">Login</button>
       </form>
     </span>
+  </div>
+  <div>
+    <a href="/system/register/">Register</a>
+  </div>
 </body>
 </html>

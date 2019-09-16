@@ -1,0 +1,34 @@
+<html>
+<head>
+</head>
+<body>
+  <div>
+    <h1>Create New User</h1>
+  </div>
+  <div>
+    {% if errors %}
+    <div style="color: red">
+      <ul>
+      {% for error, messages in errors.items %}
+        <li>{{ error }}</li>
+          <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+      {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    <span style="display:inline; float:middle;">
+      <form id="registration-form" action="/system/register/" method="post">
+        {% csrf_token %}
+        <input type="text" id="username" name="username" placeholder="Username">
+        <input type="password" id="password" name="password" placeholder="Password">
+        <input type="text" id="registration_code" name="registration_code" placeholder="Registration Code">
+        <button id="submit_btn" type="submit">Register</button>
+      </form>
+    </span>
+  </div>
+</body>
+</html>

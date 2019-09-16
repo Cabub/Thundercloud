@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Folder
 
 
-@login_required(login_url='/admin/login/')
+@login_required(login_url='/system/login/')
 def index(request):
     # ensure root folder exists
     root = request.user.folder_set.filter(parent__isnull=True).first()

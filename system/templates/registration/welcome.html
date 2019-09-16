@@ -1,0 +1,30 @@
+<html>
+<head>
+</head>
+<body>
+  <div>
+    <h1>Welcome to Thundercloud</h1>
+  </div>
+  <div>
+    <strong>This is your backup-passphrase</strong>
+    By design, we can't reset your password (because your password unlocks your decryption key).
+    If we were able to do that, we could unlock your files, which
+    is what we're specifically trying to avoid.
+    <br>
+    Instead, we're giving you this backup passphrase. Write it down, and keep it somewhere hidden and safe.
+    <br>
+    This is the only time you'll ever see it, since we don't store it on our side.
+    <br>
+    This passphrase is the only way to reset your password if you forget it.
+    <div>
+      <textarea rows="4" cols="80">
+        {{ backup_passphrase }}
+      </textarea>
+    </div>
+  </div>
+  Once you're done copying it down, feel free to click the link below to start using Thundercloud
+  <div>
+    <a href="/files/">Continue</a>
+  </div>
+</body>
+</html>
