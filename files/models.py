@@ -102,28 +102,3 @@ class File(models.Model):
 
     class Meta:
         unique_together = (('name', 'owner', 'parent'),)
-
-
-class UserBackupKey(models.Model):
-    """ This key is derived using the salt, and the user's backup code
-    """
-    owner = models.OneToOneField(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        primary_key=True
-    )
-    salt = models.BinaryField(max_length=16, null=False, blank=False)
-    cipher_key = models.BinaryField(max_length=256, null=False, blank=False)
-
-
-class UserPassphraseKey(models.Model):
-    """ This key is derived using the salt, and the user's password
-    """
-    owner = models.OneToOneField(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        primary_key=True
-    )
-    salt = models.BinaryField(max_length=16, null=False, blank=False)
-    cipher_key = models.BinaryField(max_length=256, null=False, blank=False)
-

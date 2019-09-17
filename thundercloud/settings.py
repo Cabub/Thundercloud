@@ -32,9 +32,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'system',
+    'django.contrib.auth',
     'files',
     'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -147,9 +147,9 @@ LOCAL_APPS = [
 
 
 ENCRYPTION_BACKUP_KEY = {
-    'words_list_path': 'files/animals.txt',
+    'words_list_path': 'system/animals.txt',
     'backup_token_count': 20,
-    'backup_word_list_count': 28091
+    'backup_word_list_count': 7515
 }
 
 

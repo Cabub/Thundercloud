@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, StreamingHttpResponse
 from .models import File, Folder
 from .serializers import FileSerializer, FolderSerializer, DirectorySerializer
-from .cryptography import DecryptingStreamReader, decrypt_key
+from system.cryptography import DecryptingStreamReader, decrypt_key
 
 class FileViewSet(viewsets.ModelViewSet):
     queryset = File.objects.all()
