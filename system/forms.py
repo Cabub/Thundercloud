@@ -7,7 +7,7 @@ from .models import RegistrationCode
 from .cryptography import derive_unsalted_hash
 
 
-def UnusedRegistrationCodeValidator(value):
+def validate_registration_code_unused(value):
     # validate that this registration code exists and hasn't been used
     if not RegistrationCode.objects.filter(
             user__isnull=True, code_hash=derive_unsalted_hash(value.encode())
@@ -33,10 +33,9 @@ class RegistrationForm(forms.Form):
         max_length=10, min_length=10, label='Registration Code',
         validators=(
             validators.MaxLengthValidator, validators.MinLengthValidator,
-            UnusedRegistrationCodeValidator
+            validate_registration_code_unused
         )
     )
-
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -45,7 +44,6 @@ class RegistrationForm(forms.Form):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("Passwords don't match")
         return password2
-
 
     def _post_clean(self):
         super()._post_clean()
