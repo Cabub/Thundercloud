@@ -1,7 +1,5 @@
-<html>
-<head>
-</head>
-<body>
+{% extends 'system/base.html' %}
+{% block content %}
   <div>
     <h1>Login</h1>
   </div>
@@ -16,6 +14,6 @@
   </div>
   <div>
     <a href="/system/register/">Register</a>
+    <a href="/system/password_reset/">Reset Password</a>
   </div>
-</body>
-</html>
+{% endblock %}

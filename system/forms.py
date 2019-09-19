@@ -3,6 +3,8 @@ from django.core import validators
 from django.core.exceptions import ValidationError
 from django.forms import widgets
 from django.forms.models import InlineForeignKeyField
+from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth.models import AnonymousUser
 from .models import RegistrationCode
 from .cryptography import derive_unsalted_hash
 
@@ -50,12 +52,15 @@ class RegistrationForm(forms.Form):
         password = self.cleaned_data.get('password2')
         if password:
             try:
-                password_validation.validate_password(password, self.instance)
+                validate_password(password, AnonymousUser())
             except forms.ValidationError as error:
                 self.add_error('password2', error)
 
 
 class PasswordResetForm(forms.Form):
+    username = forms.CharField(
+        max_length=150, label='Username'
+    )
     backup_passphrase = forms.CharField(
         max_length=500,
         label='Backup Passphrase'
@@ -70,6 +75,14 @@ class PasswordResetForm(forms.Form):
         label='Confirm Password',
         widget=widgets.PasswordInput
     )
+
+    def clean_password2(self):
+        # Check that the two password entries match
+        password1 = self.cleaned_data.get("password")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Passwords don't match")
+        return password2
 
 
 class RegistrationCodeModelForm(forms.ModelForm):

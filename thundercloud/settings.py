@@ -155,3 +155,4 @@ ENCRYPTION_BACKUP_KEY = {
 
 # Authentication configuration
 LOGIN_REDIRECT_URL = '/files/'
+LOGIN_URL = '/system/login/'

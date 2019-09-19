@@ -1,0 +1,9 @@
+html, body, input, textarea, select, button {
+  background-color: rgb(24, 26, 27);
+  border-bottom-color: rgb(87, 87, 87);
+  border-left-color: rgb(87, 87, 87);
+  border-right-color: rgb(87, 87, 87);
+  border-top-color: rgb(87, 87, 87);
+  color: rgb(232, 230, 227);
+  scrollbar-color: rgb(42, 44, 46) rgb(28, 30, 31);
+}

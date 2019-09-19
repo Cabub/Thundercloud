@@ -1,16 +1,19 @@
-<html>
-<head>
-  <script src='/static/lib/jquery/jquery-3.4.1.min.js'></script>
-  <script src='/static/js/utils.js'></script>
-  <script type="text/javascript">
-    var root_dir = '{{ root.id }}';
-  </script>
-  <script src='/static/files/js/index.js'></script>
-</head>
-<body>
+{% extends 'system/base.html' %}
+{% block script %}
+<script src='/static/lib/jquery/jquery-3.4.1.min.js'></script>
+<script src='/static/js/utils.js'></script>
+<script type="text/javascript">
+  var root_dir = '{{ root.id }}';
+</script>
+<script src='/static/files/js/index.js'></script>
+{% endblock %}
+{% block content %}
   <div>
     <div>
-      <span style="float:right"><a href="/system/logout/">Logout</a></span>
+      <span style="float:right">
+        <a href="/system/change_password/">Change Password</a>
+        <a href="/system/logout/">Logout</a>
+      </span>
       <h3><span id="pwd">/</span></h3>
       <span style="display:inline; float:right;">
         <form id="add-file-form" action="/files/api/v1/file" method="post" enctype="multipart/form-data">
@@ -31,5 +34,4 @@
     <ul id="directory_listing">
     </ul>
   </div>
-</body>
-</html>
+{% endblock %}
