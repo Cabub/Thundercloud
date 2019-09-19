@@ -23,9 +23,7 @@
     <span style="display:inline; float:middle;">
       <form id="registration-form" action="/system/register/" method="post">
         {% csrf_token %}
-        <input type="text" id="username" name="username" placeholder="Username">
-        <input type="password" id="password" name="password" placeholder="Password">
-        <input type="text" id="registration_code" name="registration_code" placeholder="Registration Code">
+        {{ form }}
         <button id="submit_btn" type="submit">Register</button>
       </form>
     </span>

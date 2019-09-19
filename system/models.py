@@ -65,3 +65,21 @@ class UserPassphraseKey(models.Model):
     )
     salt = models.BinaryField(max_length=16, null=False, blank=False)
     cipher_key = models.BinaryField(max_length=256, null=False, blank=False)
+
+
+class RegistrationCode(models.Model):
+    """ This is a one-time code that will allow a user to register
+    this will allow a user to register without the server operator knowing
+    specifically which code they used (unless they brute force the hashes)
+    """
+    code_hash = models.BinaryField(max_length=32, primary_key=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        null=True, blank=True
+    )
+
+    def __str__(self):
+        if self.user is None:
+            return 'Unused Registration Code'
+        return '{}\'s Registration Code'.format(self.user.username)

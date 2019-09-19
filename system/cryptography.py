@@ -23,6 +23,17 @@ def generate_salt():
     return os.urandom(16)
 
 
+def derive_unsalted_hash(text):
+    kdf = PBKDF2HMAC(
+        algorithm=hashes.SHA256(),
+        length=32,
+        salt=b'',
+        iterations=100000,
+        backend=default_backend()
+    )
+    return kdf.derive(text)
+
+
 def derive_passphrase_key(passphrase, salt):
     kdf = PBKDF2HMAC(
         algorithm=hashes.SHA256(),
@@ -179,4 +190,3 @@ class EncryptingStreamWriter(io.BufferedWriter):
 
     def write(self, b):
         return super().write(self._encrypter.encrypt(b))
-

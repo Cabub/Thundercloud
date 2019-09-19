@@ -8,7 +8,9 @@ from .cryptography import generate_backup_passphrase
 
 def register(request):
     template_name = 'registration/register.html'
-    context = dict()
+    context = {
+        'form': RegistrationForm
+    }
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
