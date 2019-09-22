@@ -45,9 +45,6 @@ def reset_password(request):
     if request.method == 'POST':
         form = context['form'](request.POST)
         if form.is_valid():
-            passphrase_key = UserPassphraseKey.objects.filter(
-                owner__username=form.cleaned_data['username']
-            ).first()
             username = form.cleaned_data.get('username')
             backup_passphrase = form.cleaned_data.get('backup_passphrase')
             user_backup_key = UserBackupKey.objects.filter(
@@ -56,7 +53,6 @@ def reset_password(request):
 
             if user_backup_key is None:
                 form.add_error(None, 'Username or Backup Key is incorrect')
-                context['errors'] = form.errors
             else:
                 try:
                     validate_password(
@@ -102,7 +98,6 @@ def change_password(request):
     if request.method == 'POST' and response.status_code == 302:
         # update UserPassphraseKey
         salt = generate_salt()
-        import pdb; pdb.set_trace()
         passphrase_key = derive_passphrase_key(
             request.POST['new_password1'].encode(), salt
         )

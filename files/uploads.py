@@ -1,6 +1,6 @@
 from django.core.files.uploadhandler import TemporaryFileUploadHandler
 from django.core.files.uploadedfile import TemporaryUploadedFile
-from .cryptography import Encrypter, generate_random_key, encrypt_key
+from system.cryptography import Encrypter, generate_random_key, encrypt_key
 from django.core.files import temp as tempfile
 from django.conf import settings
 from base64 import b64decode
