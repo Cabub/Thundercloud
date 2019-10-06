@@ -7,3 +7,5 @@ COPY requirements.txt /code/
 #RUN  ln -s /usr/lib/python3/dist-packages/gpg /usr/local/lib/python3.7/site-packages/gpg
 RUN pip install -r requirements.txt
 COPY . /code/
+CD /code/
+COMMAND ./start.sh
