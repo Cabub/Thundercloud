@@ -1,8 +1,7 @@
 #!/bin/bash
 
 if [ ! -f thundercloud/config/congig.yml ] then
-  export $SERVER_HOSTNAME
-  export $SERVER_DOMAIN
+  export $SERVER_FQDN
   export $DBPASS
   export $DBUSER
   export $DBHOST

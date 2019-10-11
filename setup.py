@@ -6,11 +6,7 @@ from random import choices
 # use environment variables to generate default config file
 config = {
     'SECRET_KEY': ''.join(choices(b64encode(os.urandom(64)).decode(), k=64)),
-    'ALLOWED_HOSTS': [
-        '{}.{}'.format(
-            os.environ['SERVER_HOSTNAME'], os.environ['SERVER_DOMAIN']
-        )
-    ],
+    'ALLOWED_HOSTS': [os.environ['SERVER_FQDN']],
     'DEBUG_MODE': os.environ.get('DEBUG_MODE', 'false') == 'true',
     'DATABASE_HOSTNAME': os.environ['DBHOST'],
     'DATABASE_USER': os.environ['DBUSER'],
