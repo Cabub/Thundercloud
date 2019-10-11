@@ -11,21 +11,27 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import yaml
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+with open(
+      os.path.join(BASE_DIR, 'thundercloud', 'config', 'config.yaml'), 'r'
+     ) as fs:
+    CONFIG = yaml.load(fs)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'bia#i^m=l4h@md&fuc#wq3v#+0v!$*3&@b-x0ueuasxi@yeu-s'
+SECRET_KEY = CONFIG['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = CONFIG['DEBUG_MODE']
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = CONFIG['ALLOWED_HOSTS']
 
 
 # Application definition
