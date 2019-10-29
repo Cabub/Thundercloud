@@ -4,8 +4,6 @@ services:
   web:
     build: .
     command: ./start.sh
-    volumes:
-      - .:/code
     ports:
       - "8080:8080"
     environment:
@@ -16,6 +14,7 @@ services:
       - DBHOST=${DATABASE_HOSTNAME}
       - DBNAME=${DATABASE_NAME}
     volumes:
+      - ./:/code
       - ${VOLUMES_ROOT_PATH}/thundercloud/config:/code/thundercloud/config
       - ${VOLUMES_ROOT_PATH}/thundercloud/media:/data
     depends_on:

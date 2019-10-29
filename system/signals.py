@@ -13,9 +13,9 @@ def prepare_session_key(sender, user, request, **kwargs):
     if 'password' in request.POST:
         passphrase_key = UserPassphraseKey.objects.filter(owner=user).first()
         key = derive_passphrase_key(
-            request.POST['password'].encode(), passphrase_key.salt
+            request.POST['password'].encode(), passphrase_key.salt.tobytes()
         )
         request.session['session_key'] = decrypt_key(
-            key, passphrase_key.cipher_key
+            key, passphrase_key.cipher_key.tobytes()
         ).decode()
         request.session.modified = True
