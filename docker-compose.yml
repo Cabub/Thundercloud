@@ -1,8 +1,6 @@
 version: '3'
 
 services:
-  #db:
-  #  image: postgres
   web:
     build: .
     command: ./start.sh
@@ -10,5 +8,27 @@ services:
       - .:/code
     ports:
       - "8080:8080"
-  #  depends_on:
-  #    - db
+    environment:
+      - DEBUG_MODE=true
+      - SERVER_FQDN=${SERVER_HOSTNAME}.${SERVER_DOMAIN}
+      - DBPASS=${DATABASE_PASSWORD}
+      - DBUSER=${DATABASE_USER}
+      - DBHOST=${DATABASE_HOSTNAME}
+      - DBNAME=${DATABASE_NAME}
+    volumes:
+      - ${VOLUMES_ROOT_PATH}/thundercloud/config:/code/thundercloud/config
+      - ${VOLUMES_ROOT_PATH}/thundercloud/media:/data
+    depends_on:
+      - postgresql
+
+  postgresql:
+    image: postgres
+    hostname: ${DATABASE_HOSTNAME}
+    container_name: postgresql
+    restart: ${RESTART_MODE}
+    environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    volumes:
+      - ${VOLUMES_ROOT_PATH}/postgresql/data:/var/lib/postgresql/data

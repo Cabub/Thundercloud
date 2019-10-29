@@ -5,3 +5,4 @@ sqlparse==0.3.0
 cryptography==2.7
 pycryptodome
 PyYAML
+psycopg2

@@ -1,12 +1,12 @@
 #!/bin/bash
 
-if [ ! -f thundercloud/config/congig.yml ]
+if [ ! -f thundercloud/config/config.yml ]
 then
-  export $SERVER_FQDN
-  export $DBPASS
-  export $DBUSER
-  export $DBHOST
-  ./setup.py
+  export SERVER_FQDN
+  export DBPASS
+  export DBUSER
+  export DBHOST
+  python setup.py
 fi
 
 pip install -r requirements.txt

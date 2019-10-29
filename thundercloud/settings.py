@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'thundercloud.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'thundercloud',
+        'NAME': CONFIG['DATABASE_NAME'],
         'USER': CONFIG['DATABASE_USER'],
         'PASSWORD': CONFIG['DATABASE_PASSWORD'],
         'HOST': CONFIG['DATABASE_HOSTNAME'],

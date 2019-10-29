@@ -10,8 +10,9 @@ config = {
     'DEBUG_MODE': os.environ.get('DEBUG_MODE', 'false') == 'true',
     'DATABASE_HOSTNAME': os.environ['DBHOST'],
     'DATABASE_USER': os.environ['DBUSER'],
-    'DATABASE_PASSWORD': os.environ['DBPASS']
+    'DATABASE_PASSWORD': os.environ['DBPASS'],
+    'DATABASE_NAME': os.environ['DBNAME']
 }
 
-with open('thundercloud/server/config/config.yml', 'w') as fs:
+with open('thundercloud/config/config.yaml', 'w') as fs:
     print(yaml.dump(config), end='', file=fs)
